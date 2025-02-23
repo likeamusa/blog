@@ -25,4 +25,4 @@ Se quiser trocar uma ideia ou sugerir algo, sinta-se à vontade para abrir uma i
 
 ---
 
-📅 *Início deste projeto:* [Coloque a data de criação]
+📅 *Início deste projeto:* [23/02/2025]
