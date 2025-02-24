@@ -19,35 +19,8 @@ Sobre o Tailwind, para mim isso é só CSS. Acho chato criar mais linhas ou até
 
 Sempre falei sobre vários assuntos, incluindo programação, tecnologia, ciência, política e outros temas. Muitos desses diálogos aconteceram comigo mesmo, rs. Hoje, com mais tempo disponível, não preciso me preocupar com gramática e ortografia, já que o ChatGPT pode corrigir para mim, rs. Essa era uma insegurança minha. Foi daí que surgiu a ideia de criar este blog.
 
-Desde o início, a ideia era não salvar os posts do blog em um banco de dados, seja NoSQL, como o MongoDB, ou SQL, como o PostgreSQL ou MySQL. Queria algo mais prático, como abrir o meu VSCode, criar um arquivo do tipo `primeiro_post.md` e dar um `git push` na minha branch `main` do meu repositório `/blog` no GitHub. Para carregar o post, usei a seguinte função:
+Desde o início, a ideia era não salvar os posts do blog em um banco de dados, seja NoSQL, como o MongoDB, ou SQL, como o PostgreSQL ou MySQL. Queria algo mais prático, como abrir o meu VSCode, criar um arquivo do tipo `primeiro_post.md` e dar um `git push` na minha branch `main` do meu repositório `/blog` no GitHub. Para carregar, uma função faz o `fetch` do arquivo `blog/primeiro_post.md` no Gitub, e logo depois, renderiza via `innerHtml` na página `post.html`
 
-```js
-async function loadPost() {
-  try {
-    const response = await fetch(`/api/posts/${postName}`);
-    const post = await response.json();
-
-    const meta = `
-    <div class="text-sm text-gray-500">
-        <div class="flex items-center">
-            <span class="mr-2">${new Date(post.data.date).toLocaleDateString()}</span>
-            <span class="mr-2">${post.data.author}</span>
-            ${post.data.tags.map(tag => `<span class="mr-2">${tag}</span>`).join('')}
-        </div>
-    </div>
-    `;
-
-    const converter = new showdown.Converter();
-    const html = converter.makeHtml(post.content);
-
-    postContent.innerHTML = html + meta;
-    document.title = `${post.data.author} | ${post.data.title}`;
-  } catch (error) {
-    console.error('Error loading post:', error);
-    postContent.innerHTML = '<div class="text-red-500">Post not found</div>';
-  }
-}
-```
 ## Próximos Passos 🔜
 
 Ainda não sei como vou publicar os projetos públicos que postarei aqui, mas provavelmente usarei a mesma abordagem que utilizei para este blog.
