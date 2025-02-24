@@ -1,50 +1,53 @@
 ---
-title: "A História do Node.js: Como Tudo Começou 🚀"
+title: "Sobre Portfólios, Ideias e Projetos"
 date: 2025-02-23
 author: "Ítalo"
-tags: ["Node.js", "História", "JavaScript", "Backend"]
+tags: ["Portfólio", "Ideias", "Projetos"]
 ---
 
-# A História do Node.js: Como Tudo Começou 🚀
+# Sobre Portfólios, Ideias e Projetos
 
-Node.js se tornou uma das tecnologias mais populares para desenvolvimento backend nos últimos anos. Mas você já se perguntou como essa plataforma surgiu? Neste artigo, vamos explorar a história do Node.js, desde sua criação até seu impacto no mundo da programação.  
+Hoje em dia, com a quantidade de frameworks e bibliotecas que facilitam a experiência do programador, ficou muito mais fácil criar e colocar um site no ar. Às vezes, nem é necessário saber programar para criar algo e torná-lo acessível para qualquer pessoa ao redor do mundo. Eu mesmo criei o meu primeiro site aos 12 anos, no hoje famoso [wix.com](https://www.wix.com), com a minha irmã, em uma lan house, na minha cidade natal. Podemos dizer que esse foi o meu primeiro portfólio. Era para ser o meu primeiro empreendimento, já que seria uma loja de sei lá o quê, rs. Queria que ainda estivesse disponível para postar aqui, mas não sei nem o nome e, se lembrasse, provavelmente não estará no ar.
 
-## 🌱 O Nascimento do Node.js  
+## O Desafio 🚀
 
-Em 2009, um desenvolvedor chamado **Ryan Dahl** apresentou o Node.js ao mundo. Na época, a maioria dos servidores utilizava tecnologias como Apache, que trabalhavam com um modelo baseado em threads. Isso significava que cada requisição de usuário criava uma nova thread no servidor, o que podia levar a problemas de desempenho e escalabilidade.  
+Quis me desafiar um pouco e, ao invés de usar as tecnologias que já estou acostumado, resolvi começar o básico: criar tudo com HTML, JavaScript e CSS. Porém, por força do hábito, acabei criando um projeto em Node.js e decidi continuar com ele. Instalei o Express, criei as rotas e expus os arquivos HTML na pasta `/public`. Como estou aprendendo um pouco sobre Docker, resolvi aplicar nesse projeto também, para facilitar o deploy e tentar acabar com aquela história de que "no meu PC funciona", rs.
 
-Dahl queria mudar isso e criar uma maneira mais eficiente de lidar com requisições. Assim, ele combinou o **motor V8 do Google Chrome**, que já era muito rápido na execução de JavaScript, com um modelo de **I/O assíncrono e orientado a eventos**. O resultado? Uma plataforma capaz de lidar com milhares de conexões simultaneamente sem consumir tantos recursos.  
+Sobre o Tailwind, para mim isso é só CSS. Acho chato criar mais linhas ou até mais arquivos para estilizar uma div. Então, peguei o CDN do [Tailwind CSS](https://tailwindcss.com) e colei no meu `index.html`. Pronto, agora posso criar minha div, colocar um `flex items-center justify-center` no parâmetro `class` e minha div está centralizada com sucesso. ✨
 
-## ⚡ O Que Fez o Node.js Ser Revolucionário?  
+## A Ideia por Trás do Blog 💡
 
-O que tornou o Node.js especial foi sua abordagem **single-threaded e event-driven**. Diferente dos servidores tradicionais, ele não cria múltiplas threads para lidar com requisições. Em vez disso, ele usa um **loop de eventos não bloqueante**, permitindo que operações de I/O (como leitura de arquivos, consultas a bancos de dados e chamadas HTTP) sejam executadas de forma assíncrona.  
+Sempre falei sobre vários assuntos, incluindo programação, tecnologia, ciência, política e outros temas. Muitos desses diálogos aconteceram comigo mesmo, rs. Hoje, com mais tempo disponível, não preciso me preocupar com gramática e ortografia, já que o ChatGPT pode corrigir para mim, rs. Essa era uma insegurança minha. Foi daí que surgiu a ideia de criar este blog.
 
-Isso trouxe algumas vantagens:  
-✅ **Alta escalabilidade** – Pode lidar com milhares de conexões simultaneamente.  
-✅ **Menor consumo de memória** – Diferente de servidores baseados em threads, o Node.js usa menos RAM.  
-✅ **Desenvolvimento full-stack com JavaScript** – Permitindo que devs usem a mesma linguagem no frontend e backend.  
+Desde o início, a ideia era não salvar os posts do blog em um banco de dados, seja NoSQL, como o MongoDB, ou SQL, como o PostgreSQL ou MySQL. Queria algo mais prático, como abrir o meu VSCode, criar um arquivo do tipo `primeiro_post.md` e dar um `git push` na minha branch `main` do meu repositório `/blog` no GitHub. Para carregar o post, usei a seguinte função:
 
-## 📈 A Evolução do Node.js  
+```js
+async function loadPost() {
+  try {
+    const response = await fetch(`/api/posts/${postName}`);
+    const post = await response.json();
 
-Desde seu lançamento, o Node.js cresceu rapidamente. Algumas das principais fases da sua evolução incluem:  
+    const meta = `
+    <div class="text-sm text-gray-500">
+        <div class="flex items-center">
+            <span class="mr-2">${new Date(post.data.date).toLocaleDateString()}</span>
+            <span class="mr-2">${post.data.author}</span>
+            ${post.data.tags.map(tag => `<span class="mr-2">${tag}</span>`).join('')}
+        </div>
+    </div>
+    `;
 
-- **2009**: Lançamento inicial por Ryan Dahl.  
-- **2010**: Primeira grande conferência sobre Node.js e o início do NPM (Node Package Manager).  
-- **2011-2014**: Empresas como LinkedIn, Netflix e PayPal começaram a adotar Node.js.  
-- **2015**: A fundação Node.js é criada, e o projeto se divide entre Node.js e io.js (que depois se reunificam).  
-- **2018-Presente**: Lançamento de novas features, melhorias no V8 e maior adoção no mercado.  
+    const converter = new showdown.Converter();
+    const html = converter.makeHtml(post.content);
 
-## 🏆 Node.js Hoje  
+    postContent.innerHTML = html + meta;
+    document.title = `${post.data.author} | ${post.data.title}`;
+  } catch (error) {
+    console.error('Error loading post:', error);
+    postContent.innerHTML = '<div class="text-red-500">Post not found</div>';
+  }
+}
+```
+## Próximos Passos 🔜
 
-Atualmente, o Node.js é amplamente utilizado por startups e grandes empresas. Frameworks populares como **Express.js, NestJS e Fastify** tornaram o desenvolvimento backend ainda mais prático.  
-
-Com sua grande comunidade e contínuas melhorias de performance, o Node.js continua sendo uma das melhores opções para construir APIs, microsserviços e aplicações de tempo real.  
-
-## 🔗 Conclusão  
-
-A história do Node.js mostra como a inovação e a busca por eficiência podem transformar o mundo da tecnologia. Desde sua criação em 2009, ele revolucionou o desenvolvimento backend e segue sendo uma das principais tecnologias para desenvolvedores.  
-
-E você, já usou Node.js em algum projeto? Deixe seu comentário abaixo! 🚀  
-
----  
-📌 **Fonte:** ChatGPT  
+Ainda não sei como vou publicar os projetos públicos que postarei aqui, mas provavelmente usarei a mesma abordagem que utilizei para este blog.
